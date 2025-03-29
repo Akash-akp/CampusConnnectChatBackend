@@ -226,5 +226,49 @@ const acceptRequest = async(req,res) => {
     
 }
 
+const removeRequest = async(req,res) => {
+    try {
+        const { friendId, userId } = req.body;
 
-module.exports = {getAllFriend,addFriend,acceptRequest,getAllFriendRequest,removeFriend,addFriendAttribute};
+        console.log(userId,friendId);
+    
+        const foundUser = await User.findById(userId);
+        if (!foundUser) {
+            return res.status(404).json({
+                message: "User not found",
+            });
+        }
+        
+
+        const foundFriend = await User.findById(friendId);
+        if (!foundFriend) {
+            return res.status(404).json({
+                message: "Friend not found",
+            });
+        }
+    
+        if (!foundUser.friendRequest.includes(foundFriend.id)) {
+            return res.status(400).json({
+                message: "Friend Request not present"
+            });
+        }
+    
+        foundUser.friendRequest = foundUser.friendRequest.filter((i)=>i.toString()!=friendId);
+        // foundUser.friendRequest.remove(foundFriend.id);
+        await foundUser.save();
+    
+        res.status(200).json({
+            message: "Friend request deleted successfully"
+        });
+    
+    } catch (error) {
+        console.error("Error adding friend:", error.message);
+        res.status(500).json({
+            message: "Internal Server Error",
+            error: error.message
+        });
+    }
+}
+
+
+module.exports = {getAllFriend,addFriend,acceptRequest,getAllFriendRequest,removeFriend,addFriendAttribute,removeRequest};

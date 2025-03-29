@@ -1,5 +1,5 @@
 const express = require('express');
-const {getAllFriend ,addFriendAttribute, addFriend, acceptRequest,getAllFriendRequest,removeFriend} = require('../controllers/friend.controller');
+const {getAllFriend ,addFriendAttribute, addFriend, acceptRequest,getAllFriendRequest,removeFriend,removeRequest} = require('../controllers/friend.controller');
 const {auth} = require('../controllers/auth.controller')
 
 const router = express.Router();
@@ -11,6 +11,7 @@ router.post('/addFriend',addFriend);
 router.post('/acceptRequest',acceptRequest)
 router.get('/getAllFriendRequest/:userId',getAllFriendRequest)
 router.delete('/removeFriend',removeFriend);
+router.post('/declineRequest',removeRequest);
 
 
 module.exports = router;
