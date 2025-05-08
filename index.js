@@ -29,7 +29,7 @@ mongoose.connect(process.env.Mongo_Url).then(
 
 const socketPort = 8085;
 
-startSocketServer(socketPort);
+startSocketServer();
 
 const port = 8000;
 

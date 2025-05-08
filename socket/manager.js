@@ -1,9 +1,9 @@
 const {WebSocketServer} = require('ws');
 const {onMessage,onError} = require('./handler');
 
-const startSocketServer = (port)=>{
+const startSocketServer = ()=>{
 
-    const wss = new WebSocketServer({port},()=>{console.log(`Websocket server is running on ws://localhost:${port}`)});
+    const wss = new WebSocketServer('wss://campusconnnectchatbackend.onrender.com');
 
     let allSocket = [];
 
