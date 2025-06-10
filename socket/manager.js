@@ -1,6 +1,5 @@
-// socket/manager.js
 const WebSocket = require('ws');
-const { onMessage, onError } = require('../index');
+const { onMessage, onError } = require('./handler'); // <-- Fix import
 
 const startSocketServer = (server) => {
   // Use the existing HTTP server for WebSocket
